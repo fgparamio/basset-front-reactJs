@@ -25,7 +25,7 @@ class App extends Component {
   makeRequest () {
     console.log("Page:" + this.state.page)
     this.state.loading = true;
-    axios.get('http://localhost:4000/users?page='+this.state.page)
+    axios.get('http://bassetbackgo-env.us-east-2.elasticbeanstalk.com/users?page='+this.state.page)
     .then(response => {
           this.setState(
             {
@@ -86,8 +86,8 @@ class App extends Component {
               </li>
             )}
          </ul>
-        </div>
         {divButtons}
+        </div>      
       </div>
     );
   }

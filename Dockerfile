@@ -1,20 +1,19 @@
 # Node
 FROM node:carbon
 
-# Create app directory
-WORKDIR /usr/src/app
+# The base node image sets a very verbose log level.
+ENV NPM_CONFIG_LOGLEVEL warn
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
-RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
-
-# Bundle app source
+# Copy all local files into the image.
 COPY . .
+# Install `serve` to run the application.
+RUN npm install -g serve
+# Install app dependencies
+RUN npm install
+# Build for production.
+RUN npm run build --production
 
-EXPOSE 3000
-CMD [ "npm", "start" ]
+# Set the command to start the node server.
+CMD serve -s build
+# Expose Server Port
+EXPOSE 5000

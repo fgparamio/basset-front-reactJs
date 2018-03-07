@@ -6,6 +6,7 @@ import { HashLoader } from 'react-spinners';
 import Img from 'react-image'
 import VisibilitySensor from 'react-visibility-sensor'
 import Photos from './Photos'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 class App extends Component {
@@ -62,20 +63,29 @@ class App extends Component {
     <div className='button__container'>
       <button disabled={this.state.page<=1}
         className='button' onClick={this.handleClickPrevious}>
-        <i class="fa fa-arrow-left"/> Previous
+        <i className="fa fa-arrow-left"/> Previous
       </button>
-      <button disabled={this.state.page===this.state.totalPages} class="fa fa-arrow-right"
+      <button disabled={this.state.page===this.state.totalPages}
         className='button' onClick={this.handleClickNext}>
-        Next   <i class="fa fa-arrow-right"/>
+        Next   <i className="fa fa-arrow-right"/>
       </button>
     </div>;
 
     let loader = <HashLoader className="sweet-loading" color={'#123abc'}
                              loading={this.state.loading} />;
 
+    let divCompleteButton =
+       <div>
+        <Link to="/photos"><button className='button button_complete'>Show Complet List</button></Link>
+        <br/><br/><br/><br/>
+       </div>;
+
     if (this.state.loading) {
       divButtons = <div/>
+      divCompleteButton = <div/>
     }
+
+
 
     return (
       <div className="App">
@@ -86,7 +96,8 @@ class App extends Component {
         <div className='sweet-loading'>
           {loader}
         </div>
-        <Photos/>
+        <br/>
+        {divButtons}
         <div className="body__container">
           <ul className="basset-ul">
            {
@@ -100,8 +111,8 @@ class App extends Component {
                  </span>
               </li>
             )}
-            {divButtons}
          </ul>
+         {divCompleteButton}
         </div>
       </div>
     ); // End Return

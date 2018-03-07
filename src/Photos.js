@@ -4,6 +4,9 @@ import axios from 'axios'
 import { PulseLoader } from 'react-spinners';
 import PhotoGrid from "react-photo-feed";
 import "react-photo-feed/library/style.css";
+import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 class Photos extends Component {
 
@@ -21,7 +24,6 @@ class Photos extends Component {
   }
 
   makeRequest () {
-    console.log("Page:" + this.state.page)
     this.state.loading = true;
     axios.get('http://bassetbackgo-env.us-east-2.elasticbeanstalk.com/users?page='
                +this.state.page)
@@ -57,7 +59,9 @@ class Photos extends Component {
 
     let divPhotos =
       <div className="Photos">
-        <PhotoGrid class="Photos" columns={size} photos={demoPhotos} />
+        <Link to="/"><button className='button'>Volver a Inicio</button></Link>
+        <PhotoGrid class="Photos" columns={3} photos={demoPhotos} />
+        <br/><br/><br/><br/>
       </div>;
 
       if(this.state.loading){
@@ -65,11 +69,17 @@ class Photos extends Component {
       }
 
     return (
-       <center>
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to Basset Users</h1>
+        </header>
         <br/>
-        {loader}
-        {divPhotos}
-       </center>
+        <div className="photo__container">
+            {loader}
+            {divPhotos}
+        </div>
+      </div>
      ); // End return
   } // End render()
 } // End Component

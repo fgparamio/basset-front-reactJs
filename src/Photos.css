@@ -5,3 +5,10 @@
   display: grid;
   width: 80%;
 }
+
+.photo__container {
+  margin-top: 75px;
+  height: auto;
+  margin-left:  50px;
+  display: grid;
+}

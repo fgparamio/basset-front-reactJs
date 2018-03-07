@@ -3,9 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 import { HashLoader } from 'react-spinners';
-import Img from 'react-image'
-import VisibilitySensor from 'react-visibility-sensor'
-import Photos from './Photos'
+import Img from 'react-image';
+import VisibilitySensor from 'react-visibility-sensor';
+import Photos from './Photos';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
@@ -76,16 +76,14 @@ class App extends Component {
 
     let divCompleteButton =
        <div>
-        <Link to="/photos"><button className='button button_complete'>Show Complet List</button></Link>
+        <Link to="/photos"><button className='button button_complete'>
+          <i className="fa fa-photo"/>  Show Photos</button>
+        </Link>
+        <Link to="/scroll"><button className='button button_complete'>
+          <i className="fa fa-list"/>  Complete List</button>
+        </Link>
         <br/><br/><br/><br/>
        </div>;
-
-    if (this.state.loading) {
-      divButtons = <div/>
-      divCompleteButton = <div/>
-    }
-
-
 
     return (
       <div className="App">
@@ -97,22 +95,21 @@ class App extends Component {
           {loader}
         </div>
         <br/>
-        {divButtons}
+        {divCompleteButton}{divButtons}
         <div className="body__container">
           <ul className="basset-ul">
            {
              this.state.users.map(user =>
                <li className="basset-li" key={user.ID}>
-                 <VisibilitySensor>
-                     <Img className="basset-img" src={user.avatar} loader={loader} />
-                 </VisibilitySensor>
                  <span className="basset-span">
                    <b> {user.ID}-{user.name} </b>
                  </span>
+                 <VisibilitySensor>
+                     <Img className="basset-img" src={user.avatar} loader={loader} />
+                 </VisibilitySensor>
               </li>
             )}
          </ul>
-         {divCompleteButton}
         </div>
       </div>
     ); // End Return

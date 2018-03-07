@@ -1,0 +1,17 @@
+.scroll__container {
+  margin-top: 25px;
+  margin-bottom: 50px;
+  height: auto;
+}
+
+
+.basset_div_scroller{
+  margin-bottom: 25px;
+}
+
+
+.basset-span-scroll {
+  font-weight: bold;
+  font-family: serif;
+  font-size: 20px;
+}

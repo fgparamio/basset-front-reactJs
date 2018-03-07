@@ -58,8 +58,11 @@ class Photos extends Component {
     let size = demoPhotos.length;
 
     let divPhotos =
-      <div className="Photos">
-        <Link to="/"><button className='button'>Volver a Inicio</button></Link>
+      <div className="Photos,App" >
+        <Link to="/">
+            <button className='button'>
+              <i className="fa fa-home"/>  Return Home</button>
+        </Link>
         <PhotoGrid class="Photos" columns={3} photos={demoPhotos} />
         <br/><br/><br/><br/>
       </div>;

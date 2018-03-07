@@ -13,6 +13,30 @@ Atom Version "1.24.0"
 
 ```
 
+React Libraries in this project:
+
+```
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-image": "^1.3.1",
+    "react-infinite-scroll-component": "^3.0.2",
+    "react-photo-feed": "^1.0.13",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "react-spinners": "^0.2.6",
+    "react-visibility-sensor": "^3.11.0"
+```
+
+
+Another Libraries: 
+
+```
+    "axios": "^0.18.0",      <= Rest Client 
+    "bootstrap": "^4.0.0",   <= Responsive Design
+
+```
+
 
 ## Demo
 
@@ -53,7 +77,6 @@ Your app is ready to be deployed!
 Jest has an integrated coverage reporter that works well with ES6 and requires no configuration.<br>
 Run `npm test -- --coverage` (note extra `--` in the middle) to include a coverage report like this:
 
-![coverage report](http://i.imgur.com/5bFhnTS.png)
 
 Note that tests run much slower with coverage so it is recommended to run it separately from your normal workflow.
 

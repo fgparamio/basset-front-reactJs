@@ -5,6 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Photos from './Photos';
+import Scroll from './Scroll';
 
 
 ReactDOM.render(
@@ -12,6 +13,7 @@ ReactDOM.render(
       <div>
         <Route exact path="/" component={App} />
         <Route path="/photos" component={Photos} />
+        <Route path="/scroll" component={Scroll} />
       </div>
   </Router>
    , document.getElementById('root'));

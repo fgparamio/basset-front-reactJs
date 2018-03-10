@@ -9,6 +9,9 @@ import logo from '../logo.svg';
 */
 class Header extends Component {
 
+  constructor (props) {
+    super(props)
+  }
   /**
   *  Render Default Header
   */
@@ -20,4 +23,5 @@ class Header extends Component {
     </header>)
   }
 } // End Component
+
 export default Header;

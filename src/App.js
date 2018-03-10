@@ -4,7 +4,7 @@ import axios from 'axios'
 import { HashLoader } from 'react-spinners';
 import Img from 'react-image';
 import VisibilitySensor from 'react-visibility-sensor';
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Header from './components/Header'
 
 /**
@@ -30,17 +30,17 @@ class App extends Component {
     // Binding Methods
     this.handleClickNext = this.handleClickNext.bind(this)
     this.handleClickPrevious = this.handleClickPrevious.bind(this)
-    this.makeRequest = this.makeRequest.bind(this)
-    this.makeRequest();
+    this.getUsers = this.getUsers.bind(this)
+    this.getUsers();
   }
 
 
   /**
-  *  MAKE_REQUEST =>
+  *  GET_USERS =>
   *      1. Set loading to true
   *      2. Throws Request to Back API while there are pages.
   */
-  makeRequest () {
+  getUsers = () => {
     this.state.loading = true;
     axios.get('http://bassetbackgo-env.us-east-2.elasticbeanstalk.com/users?page='
                +this.state.page)
@@ -61,11 +61,10 @@ class App extends Component {
   *     2. Send new Request with next Page
   */
   handleClickNext () {
-    console.log("Push Next")
     if(this.state.page<this.state.totalPages){
       this.setState({page: this.state.page++, users: []})
     }
-    this.makeRequest();
+    this.getUsers();
   }
 
   /**
@@ -74,9 +73,8 @@ class App extends Component {
   *     2. Send new Request with previous Page
   */
   handleClickPrevious () {
-    console.log("Push Previous")
     this.setState({page: this.state.page--, users: []})
-    this.makeRequest();
+    this.getUsers();
   }
 
   /**
@@ -88,10 +86,10 @@ class App extends Component {
     // Create Show Photos and Complete List Buttons
     let divCompleteButton =
        <div>
-          <Link to="/photos"><button className='button button_complete'>
+          <Link to="/photos"><button className='button button_complete button_photos'>
             <i className="fa fa-photo"/>  Show Photos</button>
           </Link>
-          <Link to="/scroll"><button className='button button_complete'>
+          <Link to="/scroll"><button className='button button_complete button_scroll'>
             <i className="fa fa-list"/>  Complete List</button>
           </Link>
         <br/><br/><br/><br/>
@@ -101,11 +99,11 @@ class App extends Component {
     let divButtons =
     <div className='button__container'>
       <button disabled={this.state.page<=1}
-        className='button' onClick={this.handleClickPrevious}>
+        className='button buttonPrevious' onClick={this.handleClickPrevious}>
         <i className="fa fa-arrow-left"/> Previous
       </button>
       <button disabled={this.state.page===this.state.totalPages}
-        className='button' onClick={this.handleClickNext}>
+        className='button buttonNext' onClick={this.handleClickNext}>
         Next   <i className="fa fa-arrow-right"/>
       </button>
     </div>;
@@ -113,7 +111,7 @@ class App extends Component {
     // Create loader for this component
     let loader = <HashLoader className="sweet-loading" color={'#123abc'}
                              loading={this.state.loading} />;
- 
+
    // Return page compose with VisibilitySensor for images
     return (
       <div className="App">
@@ -122,8 +120,8 @@ class App extends Component {
           {loader}
         </div>
         <br/>
-        {divCompleteButton}{divButtons}
-        <div className="body__container">
+          {divCompleteButton}{divButtons}
+        <div id="users" className="body__container">
           <ul className="basset-ul">
            {
              this.state.users.map(user =>

@@ -30,16 +30,17 @@ class Scroll extends Component {
     }
 
     this.generateDivs = this.generateDivs.bind(this);
-    this.makeRequest = this.makeRequest.bind(this);
+    this.getUsers = this.getUsers.bind(this);
 
-    this.makeRequest();
+    this.getUsers();
   }
 
   /**
+  *  GET_USERS =>
   *   1. Send Request API
   *   2. Generte Divs necesary for InfiniteScroll
   */
-  makeRequest () {
+  getUsers () {
 
     // Throws Axios Request to Back API
     axios.get('http://bassetbackgo-env.us-east-2.elasticbeanstalk.com/users?page='
@@ -67,7 +68,7 @@ class Scroll extends Component {
    *  Concatenate old divs with previous results with new result Data
    *  Set new divs to state
    */
-   generateDivs() {
+   generateDivs () {
 
      // Local moreDivs and count var initialize
      let moreDivs = [];
@@ -114,15 +115,13 @@ class Scroll extends Component {
             <button className='button'>
               <i className="fa fa-home"/>  Return Home</button>
           </Link>
-          // Show Infinite Scroll
-          // More information in : https://github.com/ankeetmaini/react-infinite-scroll-component
           <InfiniteScroll
-            next={this.makeRequest}
+            next={this.getUsers}
             hasMore={this.state.hasMore}
             height={650}
             loader={loader}
             endMessage={
-              <p style={{textAlign: 'center'}}>
+              <p className='basset-end-message' style={{textAlign: 'center'}}>
                 <br/><b>Yay! You have seen it all </b>
               </p>
             }>

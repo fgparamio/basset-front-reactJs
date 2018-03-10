@@ -27,16 +27,16 @@ class Photos extends Component {
       loading: true
     }
 
-    this.makeRequest = this.makeRequest.bind(this)
-    this.makeRequest();
+    this.getUsers = this.getUsers.bind(this)
+    this.getUsers();
   }
 
   /**
-  *  MAKE_REQUEST => (Recursive Method)
+  *  GET_USERS => (Recursive Method)
   *      1. Set loading to true
   *      2. Throws Request to Back API while there are pages.
   */
-  makeRequest () {
+  getUsers () {
     this.state.loading = true;
 
     // Invoke With Axis to Back API
@@ -54,7 +54,7 @@ class Photos extends Component {
             // If There are more pages throws a new request (Recursive)
             if(response.data.page<response.data.totalPages){
               this.setState({page: response.data.page+1})
-              this.makeRequest();
+              this.getUsers();
             }else {
               // End with loading to false
               this.setState({loading:false})

@@ -32,9 +32,10 @@ Testing Libraries (Dev dependencies)
 
 ```
     "chai": "^4.1.2",
-    "enzyme": "^3.3.0",
+    "enzyme": "^3.3.0",  
     "enzyme-adapter-react-16": "^1.1.1",
     "mocha": "^5.0.4",
+    "react-addons-test-utils": "^15.6.2",
     "sinon": "^4.4.2"
 ```
 
@@ -45,6 +46,7 @@ Links:
 
 [https://github.com/davidhu2000/react-spinners](https://github.com/ankeetmaini/react-infinite-scroll-component)
 
+[https://github.com/airbnb/enzyme] (https://github.com/airbnb/enzyme)
 
 
 Another Libraries:
@@ -77,6 +79,12 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
+IMPORTANT !!!  Before Running Tests install devDependencies =>
+
+```
+npm install --dev
+
+```
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](#running-tests) for more information.
 
@@ -149,16 +157,18 @@ time docker build -t react-docker .
 
 ```
 basset-front-reactJs/
-  README.md
-  node_modules/
+  README.md               <= This file
+  node_modules/           <= After npm install
   package.json
+  components/             <= React components
   public/
     index.html
     favicon.ico
   src/
-    App.css
-    App.js
-    App.test.js
+    test/                 <= Tests components
+    App.css   
+    App.js                <= Main Home component
+    App.test.js   
     index.css
     index.js
     logo.svg

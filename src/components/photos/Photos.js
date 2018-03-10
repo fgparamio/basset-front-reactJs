@@ -4,12 +4,20 @@ import axios from 'axios'
 import { PulseLoader } from 'react-spinners';
 import PhotoGrid from "react-photo-feed";
 import "react-photo-feed/library/style.css";
-import logo from './logo.svg';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Header from '../Header'
 
-
+/**
+*   @autor: fgparamio
+*
+*   PHOTOS COMPONENT => Show without paging all the photos
+*
+*/
 class Photos extends Component {
 
+  /**
+  *  CONSTRUCTOR => Initialize State and Make first Request
+  */
   constructor (props) {
     super(props)
     this.state = {
@@ -23,11 +31,19 @@ class Photos extends Component {
     this.makeRequest();
   }
 
+  /**
+  *  MAKE_REQUEST => (Recursive Method)
+  *      1. Set loading to true
+  *      2. Throws Request to Back API while there are pages.
+  */
   makeRequest () {
     this.state.loading = true;
+
+    // Invoke With Axis to Back API
     axios.get('http://bassetbackgo-env.us-east-2.elasticbeanstalk.com/users?page='
                +this.state.page)
     .then(response => {
+          // Set new State wiht response Data
           this.setState(
             {
               page: response.data.page,
@@ -35,28 +51,38 @@ class Photos extends Component {
               users: this.state.users.concat(response.data.users)
             });
 
+            // If There are more pages throws a new request (Recursive)
             if(response.data.page<response.data.totalPages){
               this.setState({page: response.data.page+1})
               this.makeRequest();
             }else {
+              // End with loading to false
               this.setState({loading:false})
             }
         }).catch((err)=> {})
   }
 
 
-
+  /**
+  *  RENDER MEHTOD =>
+  *    Show a PhotoGrid with all the photos in every page from API
+  **/
   render() {
 
+    // Create Loader
     let loader = <PulseLoader className="sweet-loading" color={'#123abc'}
                              loading={this.state.loading} />;
+
+    // demoPhotos model initialize
     let demoPhotos = []
 
+    // Map users to demoPhotos with PhotoGrid model
     this.state.users.map(user =>
         demoPhotos=demoPhotos.concat({id:user.ID,src:user.avatar,bigSrc:user.avatar}))
 
-    let size = demoPhotos.length;
-
+    /**
+    *   DIV_PHOTOS => Main div with PhotoGrid
+    */
     let divPhotos =
       <div className="Photos,App" >
         <Link to="/">
@@ -67,16 +93,15 @@ class Photos extends Component {
         <br/><br/><br/><br/>
       </div>;
 
+      // Hide main div while page is loading
       if(this.state.loading){
         divPhotos = <div/>
       }
 
+    // Return page compose
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Basset Users</h1>
-        </header>
+        <Header/>
         <br/>
         <div className="photo__container">
             {loader}

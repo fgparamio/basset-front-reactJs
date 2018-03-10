@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 import { HashLoader } from 'react-spinners';
 import Img from 'react-image';
 import VisibilitySensor from 'react-visibility-sensor';
-import Photos from './Photos';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Header from './components/Header'
 
-
+/**
+*   @autor: fgparamio
+*
+*   APP COMPONENT => Home Page Component
+*
+*/
 class App extends Component {
 
+  /**
+  *  CONSTRUCTOR => Initialize State and Make first Request
+  */
   constructor (props) {
     super(props)
     this.state = {
@@ -20,14 +27,20 @@ class App extends Component {
       loading: true
     }
 
+    // Binding Methods
     this.handleClickNext = this.handleClickNext.bind(this)
     this.handleClickPrevious = this.handleClickPrevious.bind(this)
     this.makeRequest = this.makeRequest.bind(this)
     this.makeRequest();
   }
 
+
+  /**
+  *  MAKE_REQUEST =>
+  *      1. Set loading to true
+  *      2. Throws Request to Back API while there are pages.
+  */
   makeRequest () {
-    console.log("Page:" + this.state.page)
     this.state.loading = true;
     axios.get('http://bassetbackgo-env.us-east-2.elasticbeanstalk.com/users?page='
                +this.state.page)
@@ -42,7 +55,11 @@ class App extends Component {
         }).catch((err)=> {})
   }
 
-
+  /**
+  *   Handle Next Clict Button Event
+  *     1. Check if exist more pages
+  *     2. Send new Request with next Page
+  */
   handleClickNext () {
     console.log("Push Next")
     if(this.state.page<this.state.totalPages){
@@ -51,14 +68,36 @@ class App extends Component {
     this.makeRequest();
   }
 
+  /**
+  *   Handle Previous Clict Button Event
+  *     1. Check if is first Page
+  *     2. Send new Request with previous Page
+  */
   handleClickPrevious () {
     console.log("Push Previous")
     this.setState({page: this.state.page--, users: []})
     this.makeRequest();
   }
 
+  /**
+  *  RENDER MEHTOD =>
+  *    Show a Page with ID, Name and avatar photo
+  **/
   render() {
 
+    // Create Show Photos and Complete List Buttons
+    let divCompleteButton =
+       <div>
+          <Link to="/photos"><button className='button button_complete'>
+            <i className="fa fa-photo"/>  Show Photos</button>
+          </Link>
+          <Link to="/scroll"><button className='button button_complete'>
+            <i className="fa fa-list"/>  Complete List</button>
+          </Link>
+        <br/><br/><br/><br/>
+       </div>;
+
+    // Create DivButtons element (next and previous buttons)
     let divButtons =
     <div className='button__container'>
       <button disabled={this.state.page<=1}
@@ -71,26 +110,14 @@ class App extends Component {
       </button>
     </div>;
 
+    // Create loader for this component
     let loader = <HashLoader className="sweet-loading" color={'#123abc'}
                              loading={this.state.loading} />;
-
-    let divCompleteButton =
-       <div>
-        <Link to="/photos"><button className='button button_complete'>
-          <i className="fa fa-photo"/>  Show Photos</button>
-        </Link>
-        <Link to="/scroll"><button className='button button_complete'>
-          <i className="fa fa-list"/>  Complete List</button>
-        </Link>
-        <br/><br/><br/><br/>
-       </div>;
-
+ 
+   // Return page compose with VisibilitySensor for images
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Basset Users</h1>
-        </header>
+        <Header/>
         <div className='sweet-loading'>
           {loader}
         </div>

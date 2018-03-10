@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Photos from './Photos';
-import Scroll from './Scroll';
+import Photos from './components/photos/Photos';
+import Scroll from './components/scroll/Scroll';
 
 
 ReactDOM.render(

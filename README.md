@@ -1,4 +1,4 @@
-# Basset Front React Docker Application 
+# Basset Front React Docker Application
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -28,11 +28,29 @@ React Libraries in this project:
     "react-visibility-sensor": "^3.11.0"
 ```
 
-
-Another Libraries: 
+Testing Libraries (Dev dependencies)
 
 ```
-    "axios": "^0.18.0",      <= Rest Client 
+    "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "mocha": "^5.0.4",
+    "sinon": "^4.4.2"
+```
+
+
+Links:
+
+[https://github.com/ankeetmaini/react-infinite-scroll-component](https://github.com/ankeetmaini/react-infinite-scroll-component)
+
+[https://github.com/davidhu2000/react-spinners](https://github.com/ankeetmaini/react-infinite-scroll-component)
+
+
+
+Another Libraries:
+
+```
+    "axios": "^0.18.0",      <= Rest Client
     "bootstrap": "^4.0.0",   <= Responsive Design
 
 ```
@@ -40,7 +58,7 @@ Another Libraries:
 
 ## Demo
 
-Open: [http://reactjsbassetfront-env.us-east-2.elasticbeanstalk.com](http://reactjsbassetfront-env.us-east-2.elasticbeanstalk.com) 
+Open: [http://reactjsbassetfront-env.us-east-2.elasticbeanstalk.com](http://reactjsbassetfront-env.us-east-2.elasticbeanstalk.com)
 
 to view App in the browser.
 
@@ -94,7 +112,7 @@ npm install -g serve
 serve -s build
 ```
 
-The last command shown above will serve your static site on the port **5000**. Like many of [serve](https://github.com/zeit/serve)internal settings, 
+The last command shown above will serve your static site on the port **5000**. Like many of [serve](https://github.com/zeit/serve)internal settings,
 
 The port can be adjusted using the `-p` or `--port` flags.
 
@@ -114,14 +132,14 @@ docker build -t react-docker .
 ```
 
  Run Docker image:
- 
+
 ```
 docker run -it --rm -p 5000:5000 --name react-demo react-docker
- 
+
 ```
 
  You can see that if you re-run the build command from earlier:
- 
+
 ```
 time docker build -t react-docker .
 
@@ -148,5 +166,3 @@ basset-front-reactJs/
 
 * `public/index.html` is the page template;
 * `src/index.js` is the JavaScript entry point.
-
-

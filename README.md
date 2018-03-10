@@ -46,7 +46,7 @@ Links:
 
 [https://github.com/davidhu2000/react-spinners](https://github.com/ankeetmaini/react-infinite-scroll-component)
 
-[https://github.com/airbnb/enzyme] (https://github.com/airbnb/enzyme)
+[https://github.com/airbnb/enzyme](https://github.com/airbnb/enzyme)
 
 
 Another Libraries:
